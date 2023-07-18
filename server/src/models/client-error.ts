@@ -1,5 +1,4 @@
 class ClientError { 
-    
     public status: number; // 4xx  400, 401, 403, 404...
     public message: string;
 
@@ -7,7 +6,6 @@ class ClientError {
         this.status = status;
         this.message = message;
     }
-
 }
 
 export default ClientError;

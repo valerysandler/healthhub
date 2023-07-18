@@ -7,6 +7,8 @@ import cors from "cors";
 import config from "./utils/config";
 import errorsHandler from "./middleware/errors-handler";
 import { authRouter } from './routers/auth.router';
+import { userServiceRouter } from './routers/user-service.router';
+
 
 //  Init express
 const server = express();
@@ -16,5 +18,6 @@ server.use(express.json());
 server.use(errorsHandler);
 //  Routes
 server.use("/api/auth", authRouter);
+server.use("/api/services/user_service", userServiceRouter);
 //  Start server
 server.listen(config.port, () => console.log(`Server started on port ${config.port}`));

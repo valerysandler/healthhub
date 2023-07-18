@@ -45,37 +45,32 @@ const userSchema = new Schema<IUserModel>({
         type: String,
         required: true,
         enum: Object.values(Role),
-        default: Role.client
+        default: Role.CLIENT
     }, 
     birthDate: {
         type: Date,
-        required: [true, 'Birth date is required'],
         trim: true,
     },
     country: {
         type: String,
-        required: true,
         trim: true,
         minlength: 3,
         maxlength: 50
     },
     city: {
         type: String,
-        required: true,
         trim: true,
         minlength: 3,
         maxlength: 50
     },
     address: {
         type: String,
-        required: true,
         trim: true,
         minlength: 3,
         maxlength: 50
     },
     phone: {
         type: String,
-        required: true,
         trim: true,
         minlength: 3,
         maxlength: 50
@@ -92,7 +87,7 @@ const userSchema = new Schema<IUserModel>({
     },
     isSpecialist: {
         type: Boolean,
-        required: true,
+        required: [true, 'isSpecialist is required'],
         default: false
     }
 }, {
