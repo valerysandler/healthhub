@@ -3,7 +3,7 @@ import { IUserModel } from "../models/user.model";
 import { jwtService } from "./jwt.service";
 import userService from "./user.service";
 
-async function register(user: IUserModel) {
+async function register(user: IUserModel): Promise<string> {
     const userIsExist = await userService.getUserByParams({ email: user.email, phone: user.phone });
     if (userIsExist) {
         return `User with email ${user.email} or phone ${user.phone} already exist`;
@@ -13,7 +13,7 @@ async function register(user: IUserModel) {
         specialist.userId = user._id;
         const errors = specialist.validateSync();
         if (errors) {
-            return errors;
+            return errors.message;
         }
 
         const result = await specialist.save();
@@ -21,15 +21,9 @@ async function register(user: IUserModel) {
     }
     const result = await user.save();
     console.log("User created: ", result);
-    await jwtService.generateAccessToken(result.id, result.email, result.phone, result.isSpecialist);
-    await jwtService.generateRefreshToken(result.id, result.email, result.phone, result.isSpecialist);
-    // Save tokens in database
-    // const session = new SessionModel({ userId: result.id, accessToken: accessToken, refreshToken: refreshToken });
-    // await session.save();
-    // console.log("Session created: ", session);
-    // return { accessToken, refreshToken };
-    
-    
+    // Create tokens for user and session and save them in database
+    const accessToken = await jwtService.generateAccessToken(user._id, user.email, user.phone, user.isSpecialist);
+    return accessToken;
 }
 
 export const authService = {
