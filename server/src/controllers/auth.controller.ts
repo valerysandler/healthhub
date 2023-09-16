@@ -15,7 +15,7 @@ const register = async (request: Request, response: Response, next: NextFunction
         // Check if user exist 
         // Create tokens for user and session and save them in database
         const accessToken = await authService.register(user);
-        response.status(StatusCodes.CREATED).send(accessToken);
+        response.status(StatusCodes.CREATED).json(accessToken);
     } catch (error: any) {
         response.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
     }

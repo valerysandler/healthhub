@@ -39,7 +39,7 @@ const userSchema = new Schema<IUserModel>({
         required: [true, 'Password is required'],
         trim: true,
         minlength: [7, 'Password must be at least 2 characters'],
-        maxlength: [50, 'Password must be at most 50 characters']
+        maxlength: [200, 'Password must be at most 50 characters']
     },
     role: {
         type: String,

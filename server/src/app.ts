@@ -8,7 +8,6 @@ import config from "./utils/config";
 import errorsHandler from "./middleware/errors-handler";
 import { authRouter } from './routers/auth.router';
 
-
 //  Init express
 const server = express();
 
